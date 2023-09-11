@@ -95,9 +95,5 @@ def get_player_by_full_name(player_full_name):
     return playerStats
 
 
-def returnN(n: int):
-    return n
-
-
 if __name__ == "__main__":
     print(get_names())
