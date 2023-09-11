@@ -1,6 +1,6 @@
 import random
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import commonplayerinfo, leagueleaders, teaminfocommon
+from nba_api.stats.endpoints import playerindex, leagueleaders, teaminfocommon
 from datetime import datetime
 
 headers = {
@@ -29,20 +29,21 @@ def getAge(birth_date):
 
 def get_player():
     # Get top 100 players in the NBA
-    top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
-        "rowSet"
-    ][:100]
+    # top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
+    #     "rowSet"
+    # ][:100]
 
     # Choose a random player ID from active players
-    player = random.choice(top_100)
-    player_id = player[0]
+    # player = random.choice(top_100)
+    # player_id = player[0]
+
+    return {"hi": playerindex.PlayerIndex}
 
     # Retrieve player position, jersey number, and draft number
-    player_info_dict = commonplayerinfo.CommonPlayerInfo(
-        player_id, headers=headers
-    ).get_dict()
+    # player_info_dict = commonplayerinfo.CommonPlayerInfo(
+    #     player_id, headers=headers
+    # ).get_dict()
 
-    return {"info": player_info_dict}
     # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
 
     # team_id = player_info[18]
