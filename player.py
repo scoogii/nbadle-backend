@@ -34,23 +34,26 @@ def getAge(birth_date):
 
 def get_player():
     # Get top 100 players in the NBA
-    top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
-        "rowSet"
-    ][:100]
+    # top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
+    #     "rowSet"
+    # ][:100]
+    #
+    # player = top_100[0]
+    # player_id = player[0]
+    # team_name = player[4]
 
-    player = top_100[0]
-    player_id = player[0]
-    team_name = player[4]
-
-    hi = draftboard.DraftBoard()
-
+    hi = draftboard.DraftBoard().get_dict()
     return {
-        "id": player_id,
-        "full_name": player[2],
-        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-        "team_name": team_name,
-        "yo": hi,
+        "hi": hi,
     }
+
+    # return {
+    #     "id": player_id,
+    #     "full_name": player[2],
+    #     "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+    #     "team_name": team_name,
+    #     "yo": hi,
+    # }
     # Choose a random player ID from active players
     # player = random.choice(top_100)
     # player_id = player[0]
