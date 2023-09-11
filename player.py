@@ -21,14 +21,13 @@ def get_player():
 
     # Choose a random player ID from active players
     player = random.choice(top_100)
-    print("player[0]")
     player_id = player[0]
 
     # Retrieve player position, jersey number, and draft number
-    print("commonplayerinfo")
+    print("here")
     # player_info_dict = commonplayerinfo.CommonPlayerInfo(player_id).get_dict()
-    print(commonplayerinfo.CommonPlayerInfo(player_id))
-    print("playerinfodict 0 0")
+    # print(commonplayerinfo.CommonPlayerInfo(player_id))
+    # print("playerinfodict 0 0")
     # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
     #
     # print("team id 18")
@@ -55,9 +54,9 @@ def get_player():
     #     "player_number": player_no,
     #     "draft_number": draft_pick,
     # }
-    return {"hello": 1}
+    return {"player_id": player_id, "top_100": top_100}
 
-    return playerStats
+    # return playerStats
 
 
 def get_names():
