@@ -43,15 +43,6 @@ def get_names():
     all_players = players.get_active_players()
 
     player_names = sorted([player["full_name"] for player in all_players])
-    # # Only add active players on a team to the player name list
-    # player_names = []
-    # for player in all_players:
-    #     player_info_dict = commonplayerinfo.CommonPlayerInfo(player["id"]).get_dict()
-    #     player_info = player_info_dict["resultSets"][0]["rowSet"][0]
-    #
-    #     # Check the player is on a team
-    #     if player_info[20] != "":
-    #         player_names.append(player["full_name"])
 
     return player_names
 
