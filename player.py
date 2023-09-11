@@ -4,6 +4,16 @@ from nba_api.stats.endpoints import commonplayerinfo, leagueleaders, teaminfocom
 from datetime import datetime
 
 
+def getAge(birth_date):
+    date_format = "%Y-%m-%d"
+    today = datetime.now()
+    birth_date = datetime.strptime(birth_date[0:10], date_format)
+
+    age = today - birth_date
+
+    return age.days // 365
+
+
 def get_player():
     # Get top 100 players in the NBA
     top_100 = leagueleaders.LeagueLeaders().get_dict()["resultSet"]["rowSet"][:100]
@@ -45,16 +55,6 @@ def get_names():
     player_names = sorted([player["full_name"] for player in all_players])
 
     return player_names
-
-
-def getAge(birth_date):
-    date_format = "%Y-%m-%d"
-    today = datetime.now()
-    birth_date = datetime.strptime(birth_date[0:10], date_format)
-
-    age = today - birth_date
-
-    return age.days // 365
 
 
 def get_player_by_full_name(player_full_name):
