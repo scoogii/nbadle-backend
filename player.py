@@ -26,34 +26,36 @@ def get_player():
 
     # Retrieve player position, jersey number, and draft number
     print("commonplayerinfo")
-    player_info_dict = commonplayerinfo.CommonPlayerInfo(player_id).get_dict()
+    # player_info_dict = commonplayerinfo.CommonPlayerInfo(player_id).get_dict()
+    print(commonplayerinfo.CommonPlayerInfo(player_id))
     print("playerinfodict 0 0")
-    player_info = player_info_dict["resultSets"][0]["rowSet"][0]
-
-    print("team id 18")
-    team_id = player_info[18]
-    print("player position 15")
-    player_position = player_info[15]
-    print("player no 14")
-    player_no = player_info[14]
-    print("draft pick -2")
-    draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
-    print("conference 0 0 5")
-    conference = teaminfocommon.TeamInfoCommon(team_id).get_dict()["resultSets"][0][
-        "rowSet"
-    ][0][5]
-
-    print("player stats 3 20 7")
-    playerStats = {
-        "full_name": player_info[3],
-        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-        "team_name": player_info[20],
-        "conference": conference,
-        "age": getAge(player_info[7]),
-        "position": player_position,
-        "player_number": player_no,
-        "draft_number": draft_pick,
-    }
+    # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
+    #
+    # print("team id 18")
+    # team_id = player_info[18]
+    # print("player position 15")
+    # player_position = player_info[15]
+    # print("player no 14")
+    # player_no = player_info[14]
+    # print("draft pick -2")
+    # draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
+    # print("conference 0 0 5")
+    # conference = teaminfocommon.TeamInfoCommon(team_id).get_dict()["resultSets"][0][
+    #     "rowSet"
+    # ][0][5]
+    #
+    # print("player stats 3 20 7")
+    # playerStats = {
+    #     "full_name": player_info[3],
+    #     "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+    #     "team_name": player_info[20],
+    #     "conference": conference,
+    #     "age": getAge(player_info[7]),
+    #     "position": player_position,
+    #     "player_number": player_no,
+    #     "draft_number": draft_pick,
+    # }
+    return {"hello": 1}
 
     return playerStats
 
