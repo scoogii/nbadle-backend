@@ -4,9 +4,9 @@ from nba_api.stats.endpoints import (
     commonplayerinfo,
     leagueleaders,
     teaminfocommon,
-    draftboard,
 )
 from datetime import datetime
+import time
 
 headers = {
     "Host": "stats.nba.com",
@@ -34,57 +34,46 @@ def getAge(birth_date):
 
 def get_player():
     # Get top 100 players in the NBA
-    # top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
-    #     "rowSet"
-    # ][:100]
-    #
-    # player = top_100[0]
-    # player_id = player[0]
-    # team_name = player[4]
+    top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
+        "rowSet"
+    ][:100]
 
-    # return {
-    #     "id": player_id,
-    #     "full_name": player[2],
-    #     "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-    #     "team_name": team_name,
-    #     "yo": hi,
-    # }
     # Choose a random player ID from active players
-    # player = random.choice(top_100)
-    # player_id = player[0]
+    player = random.choice(top_100)
+    player_id = player[0]
+
+    time.sleep(0.600)
 
     # Retrieve player position, jersey number, and draft number
-    # player_info_dict = commonplayerinfo.CommonPlayerInfo(
-    #     player_id, headers=headers
-    # ).get_dict()
     player_info_dict = commonplayerinfo.CommonPlayerInfo(
-        "203999", headers=headers
+        player_id, headers=headers
     ).get_dict()
 
-    return {"info": player_info_dict}
+    player_info = player_info_dict["resultSets"][0]["rowSet"][0]
 
-    # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
+    team_id = player_info[18]
+    player_position = player_info[15]
+    player_no = player_info[14]
+    draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
 
-    # team_id = player_info[18]
-    # player_position = player_info[15]
-    # player_no = player_info[14]
-    # draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
-    # conference = teaminfocommon.TeamInfoCommon(team_id, headers=headers).get_dict()[
-    #     "resultSets"
-    # ][0]["rowSet"][0][5]
-    #
-    # playerStats = {
-    #     "full_name": player_info[3],
-    #     "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-    #     "team_name": player_info[20],
-    #     "conference": conference,
-    #     "age": getAge(player_info[7]),
-    #     "position": player_position,
-    #     "player_number": player_no,
-    #     "draft_number": draft_pick,
-    # }
+    time.sleep(0.600)
 
-    # return playerStats
+    conference = teaminfocommon.TeamInfoCommon(team_id, headers=headers).get_dict()[
+        "resultSets"
+    ][0]["rowSet"][0][5]
+
+    playerStats = {
+        "full_name": player_info[3],
+        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+        "team_name": player_info[20],
+        "conference": conference,
+        "age": getAge(player_info[7]),
+        "position": player_position,
+        "player_number": player_no,
+        "draft_number": draft_pick,
+    }
+
+    return playerStats
 
 
 def get_names():
