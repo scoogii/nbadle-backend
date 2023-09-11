@@ -37,7 +37,11 @@ def get_player():
     # player = random.choice(top_100)
     # player_id = player[0]
 
-    return {"hi": playerindex.PlayerIndex}
+    return {
+        "hi": playerindex.PlayerIndex(
+            league_id="00", season="2022-2023", headers=headers
+        )
+    }
 
     # Retrieve player position, jersey number, and draft number
     # player_info_dict = commonplayerinfo.CommonPlayerInfo(
