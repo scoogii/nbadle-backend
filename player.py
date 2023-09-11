@@ -46,7 +46,7 @@ def get_player():
 
     time.sleep(1)
 
-    playerDF = player.Summary(player_id).info()
+    playerDF = player.Summary(str(player_id)).info()
     return {"hi": playerDF.loc[0, "DRAFT_YEAR"]}
 
     #
