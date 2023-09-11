@@ -41,12 +41,12 @@ def get_player():
     ][:100]
 
     # Choose a random player ID from active players
-    player = random.choice(top_100)
-    player_id = player[0]
+    player_to_choose = random.choice(top_100)
+    player_id = player_to_choose[0]
 
     time.sleep(1)
 
-    playerDF = player.Summary(str(player_id)).info()
+    playerDF = player.Summary(player_id).info()
     return {"hi": playerDF.loc[0, "DRAFT_YEAR"]}
 
     #
