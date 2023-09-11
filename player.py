@@ -116,4 +116,4 @@ def get_player_by_full_name(player_full_name):
 
 
 if __name__ == "__main__":
-    pass
+    print(len(get_names()))
