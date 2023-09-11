@@ -33,8 +33,14 @@ def get_player():
         "rowSet"
     ][:100]
 
+    player = top_100[0]
+    player_id = player[0]
+    team_name = player[4]
     return {
-        "help": top_100,
+        "id": player_id,
+        "full_name": player[1],
+        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+        "team_name": team_name,
     }
     # Choose a random player ID from active players
     # player = random.choice(top_100)
