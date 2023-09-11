@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'nbadle-backend-123'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50FA7583EF4649FEB3C50BB41AD28363 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_43F25A130CB84EA48F766AC5ECB88709 }}
