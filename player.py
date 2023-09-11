@@ -5,7 +5,6 @@ from nba_api.stats.endpoints import (
     leagueleaders,
     teaminfocommon,
 )
-from nbapy import player
 from datetime import datetime
 import time
 
@@ -46,41 +45,36 @@ def get_player():
 
     time.sleep(1)
 
-    playerDF = player.Summary(player_id).info()
-    return {"hi": playerDF.loc[0, "DRAFT_YEAR"]}
+    # Retrieve player position, jersey number, and draft number
+    player_info_dict = commonplayerinfo.CommonPlayerInfo(
+        player_id, headers=headers
+    ).get_dict()
 
-    #
-    # # Retrieve player position, jersey number, and draft number
-    # player_info_dict = commonplayerinfo.CommonPlayerInfo(
-    #     player_id, headers=headers
-    # ).get_dict()
-    #
-    # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
-    #
-    # team_id = player_info[18]
-    # player_position = player_info[15]
-    # player_no = player_info[14]
-    # draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
-    #
-    # time.sleep(1)
-    #
-    # conference = teaminfocommon.TeamInfoCommon(team_id, headers=headers).get_dict()[
-    #     "resultSets"
-    # ][0]["rowSet"][0][5]
-    #
-    # playerStats = {
-    #     "full_name": player_info[3],
-    #     "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-    #     "team_name": player_info[20],
-    #     "conference": conference,
-    #     "age": getAge(player_info[7]),
-    #     "position": player_position,
-    #     "player_number": player_no,
-    #     "draft_number": draft_pick,
-    # }
-    #
-    # return playerStats
-    #
+    player_info = player_info_dict["resultSets"][0]["rowSet"][0]
+
+    team_id = player_info[18]
+    player_position = player_info[15]
+    player_no = player_info[14]
+    draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
+
+    time.sleep(1)
+
+    conference = teaminfocommon.TeamInfoCommon(team_id, headers=headers).get_dict()[
+        "resultSets"
+    ][0]["rowSet"][0][5]
+
+    playerStats = {
+        "full_name": player_info[3],
+        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+        "team_name": player_info[20],
+        "conference": conference,
+        "age": getAge(player_info[7]),
+        "position": player_position,
+        "player_number": player_no,
+        "draft_number": draft_pick,
+    }
+
+    return playerStats
 
 
 def get_names():
@@ -122,6 +116,4 @@ def get_player_by_full_name(player_full_name):
 
 
 if __name__ == "__main__":
-    # print(player.Career("203999"))
-    playerDF = player.Summary("203999").info()
-    print(playerDF.loc[0, "DRAFT_YEAR"])
+    pass
