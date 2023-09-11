@@ -34,16 +34,18 @@ def get_player():
         "rowSet"
     ][0][5]
 
-    playerStats = {
-        "full_name": player_info[3],
-        "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
-        "team_name": player_info[20],
-        "conference": conference,
-        "age": getAge(player_info[7]),
-        "position": player_position,
-        "player_number": player_no,
-        "draft_number": draft_pick,
-    }
+    playerStats = [
+        {
+            "full_name": player_info[3],
+            "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
+            "team_name": player_info[20],
+            "conference": conference,
+            "age": getAge(player_info[7]),
+            "position": player_position,
+            "player_number": player_no,
+            "draft_number": draft_pick,
+        }
+    ]
 
     return playerStats
 
