@@ -61,6 +61,7 @@ def get_guessed_player():
     Flask route to get player stats from guessed name
     """
     full_name = request.args.get("guess")
+    print(full_name)
     return dumps(get_player_by_full_name(full_name))
 
 
