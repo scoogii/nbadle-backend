@@ -42,11 +42,6 @@ def get_player():
     # player_id = player[0]
     # team_name = player[4]
 
-    hi = draftboard.DraftBoard(headers=headers).get_dict()
-    return {
-        "hi": hi,
-    }
-
     # return {
     #     "id": player_id,
     #     "full_name": player[2],
@@ -62,6 +57,11 @@ def get_player():
     # player_info_dict = commonplayerinfo.CommonPlayerInfo(
     #     player_id, headers=headers
     # ).get_dict()
+    player_info_dict = commonplayerinfo.CommonPlayerInfo(
+        "203999", headers=headers
+    ).get_dict()
+
+    return {"info": player_info_dict}
 
     # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
 
