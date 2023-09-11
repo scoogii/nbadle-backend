@@ -56,7 +56,6 @@ def get_player_by_full_name(player_full_name):
 
     # Find row corresponding to player_id
     player_row = players_df.loc[players_df["DISPLAY_FIRST_LAST"] == player_full_name]
-    print(player_row)
 
     playerStats = {
         "full_name": player_full_name,
