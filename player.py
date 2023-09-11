@@ -13,7 +13,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0",
     "Accept": "application/json, text/plain, */*",
     "Accept-Language": "en-US,en;q=0.5",
-    "Referer": "stats.nba.com",
+    "Referer": "https://stats.nba.com/",
     "Origin": "stats.nba.com",
     "Accept-Encoding": "gzip, deflate, br",
     "Connection": "keep-alive",
@@ -33,6 +33,7 @@ def getAge(birth_date):
 
 
 def get_player():
+    time.sleep(1)
     # Get top 100 players in the NBA
     top_100 = leagueleaders.LeagueLeaders(headers=headers).get_dict()["resultSet"][
         "rowSet"
@@ -42,7 +43,7 @@ def get_player():
     player = random.choice(top_100)
     player_id = player[0]
 
-    time.sleep(0.600)
+    time.sleep(1)
 
     # Retrieve player position, jersey number, and draft number
     player_info_dict = commonplayerinfo.CommonPlayerInfo(
@@ -56,7 +57,7 @@ def get_player():
     player_no = player_info[14]
     draft_pick = "Undrafted" if player_info[-2] == "Undrafted" else player_info[-2]
 
-    time.sleep(0.600)
+    time.sleep(1)
 
     conference = teaminfocommon.TeamInfoCommon(team_id, headers=headers).get_dict()[
         "resultSets"
