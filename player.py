@@ -33,17 +33,18 @@ def get_player():
         "rowSet"
     ][:100]
 
-    return {"top": top_100}
     # Choose a random player ID from active players
-    # player = random.choice(top_100)
-    # player_id = player[0]
-    #
-    # # Retrieve player position, jersey number, and draft number
-    # player_info_dict = commonplayerinfo.CommonPlayerInfo(
-    #     player_id, headers=headers
-    # ).get_dict()
+    player = random.choice(top_100)
+    player_id = player[0]
+
+    # Retrieve player position, jersey number, and draft number
+    player_info_dict = commonplayerinfo.CommonPlayerInfo(
+        player_id, headers=headers
+    ).get_dict()
+
+    return {"info": player_info_dict}
     # player_info = player_info_dict["resultSets"][0]["rowSet"][0]
-    #
+
     # team_id = player_info[18]
     # player_position = player_info[15]
     # player_no = player_info[14]
@@ -62,7 +63,7 @@ def get_player():
     #     "player_number": player_no,
     #     "draft_number": draft_pick,
     # }
-    #
+
     # return playerStats
 
 
