@@ -1,6 +1,11 @@
 import random
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import commonplayerinfo, leagueleaders, teaminfocommon
+from nba_api.stats.endpoints import (
+    commonplayerinfo,
+    leagueleaders,
+    teaminfocommon,
+    draftboard,
+)
 from datetime import datetime
 
 headers = {
@@ -36,11 +41,15 @@ def get_player():
     player = top_100[0]
     player_id = player[0]
     team_name = player[4]
+
+    hi = draftboard.DraftBoard()
+
     return {
         "id": player_id,
-        "full_name": player[1],
+        "full_name": player[2],
         "headshot": f"https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/{player_id}.png",
         "team_name": team_name,
+        "yo": hi,
     }
     # Choose a random player ID from active players
     # player = random.choice(top_100)
