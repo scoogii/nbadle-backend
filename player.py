@@ -10,10 +10,10 @@ import time
 
 headers = {
     "Host": "stats.nba.com",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0",
     "Accept": "application/json, text/plain, */*",
     "Accept-Language": "en-US,en;q=0.5",
-    "Referer": "https://stats.nba.com/",
+    "Referer": "https://www.nba.com/",
     "Origin": "stats.nba.com",
     "Accept-Encoding": "gzip, deflate, br",
     "Connection": "keep-alive",
