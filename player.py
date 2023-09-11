@@ -42,7 +42,7 @@ def get_player():
     # player_id = player[0]
     # team_name = player[4]
 
-    hi = draftboard.DraftBoard().get_dict()
+    hi = draftboard.DraftBoard(headers=headers).get_dict()
     return {
         "hi": hi,
     }
