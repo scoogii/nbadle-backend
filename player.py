@@ -17,16 +17,15 @@ headers = {
 
 
 def get_player():
-    # TODO: Make CSV for this too
     # Get top 100 players in the NBA
-
     # Create players dataframe from csv
-    players_df = pd.read_csv("./player_data.csv")
+    top_100 = pd.read_csv("./top_100_players_id.csv")
 
     # Choose a random player ID from active players
-    player_id = random.choice(players_df["PERSON_ID"].tolist())
+    player_id = random.choice(top_100["PLAYER_ID"].tolist())
 
-    # Find row corresponding to player_id
+    # Find row corresponding to player_id in stats csv
+    players_df = pd.read_csv("./player_data.csv")
     player_row = players_df.loc[players_df["PERSON_ID"] == numpy.int64(player_id)]
 
     playerStats = {
@@ -72,4 +71,4 @@ def get_player_by_full_name(player_full_name):
 
 
 if __name__ == "__main__":
-    print(get_player_by_full_name("LeBron James"))
+    print(get_player())
