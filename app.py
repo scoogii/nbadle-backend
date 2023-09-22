@@ -7,7 +7,7 @@ Framework for server that runs backend for NBAdle
 from json import dumps
 from flask import Flask, request
 from flask_cors import CORS
-from player import get_player, get_names, get_player_by_full_name
+from player import get_player, get_names, get_player_by_full_name, get_daily_player
 
 
 def default_handler(err):
@@ -61,8 +61,15 @@ def get_guessed_player():
     Flask route to get player stats from guessed name
     """
     full_name = request.args.get("guess")
-    print(full_name)
     return dumps(get_player_by_full_name(full_name))
+
+
+@app.route("/api/getdailyplayer", methods=["GET"])
+def get_daily():
+    """
+    Flask route to get the player for daily game mode
+    """
+    return dumps(get_daily_player())
 
 
 if __name__ == "__main__":
