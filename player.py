@@ -1,6 +1,7 @@
 import random
 import numpy
 import pandas as pd
+from datetime import date
 
 headers = {
     "Host": "stats.nba.com",
@@ -70,5 +71,30 @@ def get_player_by_full_name(player_full_name):
     return playerStats
 
 
+def get_daily_player():
+    # Check the current date against the stored date in time.txt
+    stored_time = open("time.txt", "r+")
+    stored_player = open("player.txt", "r+")
+    stored_time_value = stored_time.readline()
+    stored_player_value = stored_player.readline()
+
+    # If the current date equals stored date, return stored player data
+    if str(date.today()) == stored_time_value:
+        return get_player_by_full_name(stored_player_value)
+    # If the current date is greater than the stored date
+    elif str(date.today()) > stored_time_value:
+        # Get a new player from top_100_players_id.csv and get their data
+        new_player = get_player()
+        if new_player["full_name"] == stored_player_value:
+            new_player = get_player()
+        # Change time.txt to the new current time
+        stored_time.write(str(date.today()))
+        # Change player.txt to the new player's name
+        stored_player.write(new_player["full_name"])
+
+        # Return the player's data
+        return new_player
+
+
 if __name__ == "__main__":
-    print(get_player())
+    pass
