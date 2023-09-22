@@ -97,4 +97,6 @@ def get_daily_player():
 
 
 if __name__ == "__main__":
-    pass
+    stored_player = open("player.txt", "r+")
+    stored_player_value = stored_player.readline()
+    print(get_player_by_full_name("LeBron James"))
