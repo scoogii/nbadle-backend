@@ -80,6 +80,8 @@ def get_daily_player():
 
     # If the current date equals stored date, return stored player data
     if str(date.today()) == stored_time_value:
+        stored_time.close()
+        stored_player.close()
         return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
     elif str(date.today()) > stored_time_value:
@@ -88,11 +90,15 @@ def get_daily_player():
         if new_player["full_name"] == stored_player_value:
             new_player = get_player()
         # Change time.txt to the new current time
+        stored_time.truncate(0)
         stored_time.write(str(date.today()))
         # Change player.txt to the new player's name
+        stored_player.truncate(0)
         stored_player.write(new_player["full_name"])
 
         # Return the player's data
+        stored_time.close()
+        stored_player.close()
         return new_player
 
 
