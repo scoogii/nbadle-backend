@@ -81,12 +81,10 @@ def get_daily_player():
     stored_player_read.close()
 
     # If the current date equals stored date, return stored player data
-    if str(date.today()) == stored_time_value:
-        print("im here")
+    if date.today() == datetime.strptime(stored_time_value.strip(), "%Y-%m-%d").date():
         return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
-    elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
-        print("elif")
+    elif date.today() > datetime.strptime(stored_time_value.strip(), "%Y-%m-%d").date():
         # Get a new player from top_100_players_id.csv and get their data
         new_player = get_player()
         if new_player["full_name"] == stored_player_value:
@@ -104,6 +102,4 @@ def get_daily_player():
 
 
 if __name__ == "__main__":
-    stored_player = open("player.txt", "r+")
-    stored_player_value = stored_player.readline()
-    print(get_player_by_full_name("LeBron James"))
+    get_daily_player()
