@@ -102,4 +102,4 @@ def get_daily_player():
 
 
 if __name__ == "__main__":
-    get_daily_player()
+    print(get_daily_player())
