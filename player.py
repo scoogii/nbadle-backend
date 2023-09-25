@@ -88,10 +88,10 @@ def get_daily_player():
             new_player = get_player()
 
         # Change time in csv to the new current time
-        daily_df["TIME"].iloc[0] = str(date.today())
+        daily_df.at[0, "TIME"] = str(date.today())
 
         # Change player in csv to the new player's name
-        daily_df["PLAYER"].iloc[0] = new_player["full_name"]
+        daily_df.at[0, "PLAYER"] = new_player["full_name"]
 
         daily_df.to_csv("./daily.csv", index=False)
 
