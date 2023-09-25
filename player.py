@@ -71,33 +71,32 @@ def get_player_by_full_name(player_full_name):
     return playerStats
 
 
-# TODO: postgres for daily player, render doesn't edit files :(
 def get_daily_player():
     # Check the current date against the stored date in time.txt
     daily_df = pd.read_csv("./daily.csv")
-    # stored_time_value = daily_df["TIME"].iloc[0]
+    stored_time_value = daily_df["TIME"].iloc[0]
     stored_player_value = str(daily_df["PLAYER"].iloc[0])
 
     # If the current date equals stored date, return stored player data
-    # if date.today() == datetime.strptime(stored_time_value, "%Y-%m-%d").date():
-    return get_player_by_full_name(stored_player_value)
+    if date.today() == datetime.strptime(stored_time_value, "%Y-%m-%d").date():
+        return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
-    # elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
-    #     # Get a new player from top_100_players_id.csv and get their data
-    #     new_player = get_player()
-    #     if new_player["full_name"] == stored_player_value:
-    #         new_player = get_player()
-    #
-    #     # Change time in csv to the new current time
-    #     daily_df.at[0, "TIME"] = str(date.today())
-    #
-    #     # Change player in csv to the new player's name
-    #     daily_df.at[0, "PLAYER"] = new_player["full_name"]
-    #
-    #     daily_df.to_csv("./daily.csv", index=False)
-    #
-    #     # Return the player's data
-    #     return new_player
+    elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
+        # Get a new player from top_100_players_id.csv and get their data
+        new_player = get_player()
+        if new_player["full_name"] == stored_player_value:
+            new_player = get_player()
+
+        # Change time in csv to the new current time
+        daily_df.at[0, "TIME"] = str(date.today())
+
+        # Change player in csv to the new player's name
+        daily_df.at[0, "PLAYER"] = new_player["full_name"]
+
+        daily_df.to_csv("./daily.csv", index=False)
+
+        # Return the player's data
+        return new_player
 
 
 if __name__ == "__main__":
