@@ -75,16 +75,16 @@ def get_daily_player():
     # Check the current date against the stored date in time.txt
     stored_time_read = open("time.txt", "r")
     stored_player_read = open("player.txt", "r")
-    stored_time_value = stored_time_read.readline()
-    stored_player_value = stored_player_read.readline()
+    stored_time_value = stored_time_read.readline().strip()
+    stored_player_value = stored_player_read.readline().strip()
     stored_time_read.close()
     stored_player_read.close()
 
     # If the current date equals stored date, return stored player data
-    if date.today() == datetime.strptime(stored_time_value.strip(), "%Y-%m-%d").date():
+    if date.today() == datetime.strptime(stored_time_value, "%Y-%m-%d").date():
         return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
-    elif date.today() > datetime.strptime(stored_time_value.strip(), "%Y-%m-%d").date():
+    elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
         # Get a new player from top_100_players_id.csv and get their data
         new_player = get_player()
         if new_player["full_name"] == stored_player_value:
