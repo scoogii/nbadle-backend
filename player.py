@@ -73,12 +73,9 @@ def get_player_by_full_name(player_full_name):
 
 def get_daily_player():
     # Check the current date against the stored date in time.txt
-    stored_time_read = open("time.txt", "r")
-    stored_player_read = open("player.txt", "r")
-    stored_time_value = stored_time_read.readline().strip()
-    stored_player_value = stored_player_read.readline().strip()
-    stored_time_read.close()
-    stored_player_read.close()
+    daily_df = pd.read_csv("./daily.csv")
+    stored_time_value = daily_df["TIME"].iloc[0]
+    stored_player_value = str(daily_df["PLAYER"].iloc[0])
 
     # If the current date equals stored date, return stored player data
     if date.today() == datetime.strptime(stored_time_value, "%Y-%m-%d").date():
@@ -89,14 +86,15 @@ def get_daily_player():
         new_player = get_player()
         if new_player["full_name"] == stored_player_value:
             new_player = get_player()
-        # Change time.txt to the new current time
-        stored_time_write = open("time.txt", "w")
-        stored_time_write.write(str(date.today()))
-        stored_time_write.close()
-        # Change player.txt to the new player's name
-        stored_player_write = open("player.txt", "w")
-        stored_player_write.write(new_player["full_name"])
-        stored_player_write.close()
+
+        # Change time in csv to the new current time
+        daily_df["TIME"].iloc[0] = str(date.today())
+
+        # Change player in csv to the new player's name
+        daily_df["PLAYER"].iloc[0] = new_player["full_name"]
+
+        daily_df.to_csv("./daily.csv", index=False)
+
         # Return the player's data
         return new_player
 
