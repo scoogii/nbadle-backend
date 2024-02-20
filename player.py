@@ -20,10 +20,10 @@ headers = {
 def get_player():
     # Get top 100 players in the NBA
     # Create players dataframe from csv
-    top_players = pd.read_csv("./top_players.csv")
+    top_players = pd.read_csv("./top_players.csv", index_col=0)
 
     # Choose a random player ID from active players
-    player_id = random.choice(top_players["PLAYER_ID"].tolist())
+    player_id = random.choice(top_players.tolist())
 
     # Find row corresponding to player_id in stats csv
     players_df = pd.read_csv("./player_data.csv")
