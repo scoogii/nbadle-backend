@@ -20,10 +20,10 @@ headers = {
 def get_player():
     # Get top 100 players in the NBA
     # Create players dataframe from csv
-    top_100 = pd.read_csv("./top_100_players_id.csv")
+    top_players = pd.read_csv("./top_players.csv")
 
     # Choose a random player ID from active players
-    player_id = random.choice(top_100["PLAYER_ID"].tolist())
+    player_id = random.choice(top_players["PLAYER_ID"].tolist())
 
     # Find row corresponding to player_id in stats csv
     players_df = pd.read_csv("./player_data.csv")
@@ -82,7 +82,7 @@ def get_daily_player():
         return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
     elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
-        # Get a new player from top_100_players_id.csv and get their data
+        # Get a new player from top_players.csv and get their data
         new_player = get_player()
         if new_player["full_name"] == stored_player_value:
             new_player = get_player()
