@@ -20,10 +20,9 @@ headers = {
 def get_player():
     # Get top 100 players in the NBA
     # Create players dataframe from csv
-    top_players = pd.read_csv("./top_players.csv", index_col=0)
-
+    top_players = pd.read_csv("./top_players.csv")
     # Choose a random player ID from active players
-    player_id = random.choice(top_players.tolist())
+    player_id = random.choice(top_players["PLAYER_ID"].tolist())
 
     # Find row corresponding to player_id in stats csv
     players_df = pd.read_csv("./player_data.csv")
@@ -100,4 +99,4 @@ def get_daily_player():
 
 
 if __name__ == "__main__":
-    print(get_daily_player())
+    print(get_player())
