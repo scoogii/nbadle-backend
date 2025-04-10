@@ -6,6 +6,6 @@
 ## For `active_players_data.csv`
 
 - Change date format to MM/DD/YYYY
-- Use `INT(YEARFRAC("CELL" - TODAY()))`
+- Use `INT(YEARFRAC("CELL" - TODAY()))` for age column
 - Remove all players with no team
 - Sort by names alphabetically
