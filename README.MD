@@ -1,7 +1,7 @@
 # How to Update
 
 - Run `extracting_nba_api_data.py` and `extracting_top_players_data.py`
-- Open Excel and edit `active_players_data.csv` and `top_200_players_id.csv`
+- Open Excel and edit `active_players_data.csv`
 
 ## For `active_players_data.csv`
 
