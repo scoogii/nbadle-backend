@@ -1,6 +1,12 @@
 import random
+import unicodedata
 import pandas as pd
 from datetime import date, datetime
+
+
+def _normalize_display_name(name):
+    """Normalize accented characters to ASCII (e.g. Dončić -> Doncic)."""
+    return unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode("ascii")
 
 headers = {
     "Host": "stats.nba.com",
@@ -24,7 +30,7 @@ def get_player():
     player_id = random.choice(top_players["PLAYER_ID"].tolist())
 
     # Find row corresponding to player_id in stats csv
-    players_df = pd.read_csv("./player_data.csv")
+    players_df = _read_players()
     player_row = players_df.loc[players_df["PERSON_ID"] == player_id]
 
     playerStats = {
@@ -42,16 +48,23 @@ def get_player():
     return playerStats
 
 
+def _read_players():
+    """Read player_data.csv with normalized display names."""
+    df = pd.read_csv("./player_data.csv")
+    df["DISPLAY_FIRST_LAST"] = df["DISPLAY_FIRST_LAST"].apply(_normalize_display_name)
+    return df
+
+
 def get_names():
     # Get top 100 players in the NBA
-    players_df = pd.read_csv("./player_data.csv")
+    players_df = _read_players()
     player_names = players_df["DISPLAY_FIRST_LAST"].tolist()
 
     return player_names
 
 
 def get_player_by_full_name(player_full_name):
-    players_df = pd.read_csv("./player_data.csv")
+    players_df = _read_players()
 
     # Find row corresponding to player_id
     player_row = players_df.loc[players_df["DISPLAY_FIRST_LAST"] == player_full_name]
