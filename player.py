@@ -1,5 +1,4 @@
 import random
-import numpy
 import pandas as pd
 from datetime import date, datetime
 
@@ -26,7 +25,7 @@ def get_player():
 
     # Find row corresponding to player_id in stats csv
     players_df = pd.read_csv("./player_data.csv")
-    player_row = players_df.loc[players_df["PERSON_ID"] == numpy.int64(player_id)]
+    player_row = players_df.loc[players_df["PERSON_ID"] == player_id]
 
     playerStats = {
         "full_name": player_row["DISPLAY_FIRST_LAST"].iloc[0],
@@ -37,6 +36,7 @@ def get_player():
         "position": player_row["POSITION"].iloc[0],
         "player_number": int(player_row["JERSEY"].iloc[0]),
         "draft_number": player_row["DRAFT_NUMBER"].iloc[0],
+        "draft_year": player_row["DRAFT_YEAR"].iloc[0],
     }
 
     return playerStats
@@ -65,6 +65,7 @@ def get_player_by_full_name(player_full_name):
         "position": player_row["POSITION"].iloc[0],
         "player_number": int(player_row["JERSEY"].iloc[0]),
         "draft_number": player_row["DRAFT_NUMBER"].iloc[0],
+        "draft_year": player_row["DRAFT_YEAR"].iloc[0],
     }
 
     return playerStats

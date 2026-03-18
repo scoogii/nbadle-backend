@@ -16,31 +16,28 @@ import numpy as np
 def format_player_data():
     df = pd.read_csv("active_players_data.csv")
 
-    # Remove first redundant column
-    df.drop(df.columns[0], axis=1, inplace=True)
-
     # Remove all players with no team
-    df = df.dropna()
+    df = df.dropna(subset=["TEAM_NAME"])
 
     # Change date field to DD/MM/YYYY
-    df["BIRTHDATE"] = pd.to_datetime(df["BIRTHDATE"], dayfirst=True)
+    df["BIRTHDATE"] = pd.to_datetime(df["BIRTHDATE"], format="mixed")
     df["BIRTHDATE"] = df["BIRTHDATE"].dt.strftime("%d/%m/%Y")
 
     # Add age column
     if "AGE" not in df.columns:
         df.insert(3, "AGE", value="")
-        df["AGE"] = (
-            np.floor(
-                (
-                    pd.to_datetime("today")
-                    - pd.to_datetime(df["BIRTHDATE"], dayfirst=True)
-                ).dt.days
-                / 365.25
-            )
-        ).astype(int)
+    df["AGE"] = (
+        np.floor(
+            (
+                pd.to_datetime("today")
+                - pd.to_datetime(df["BIRTHDATE"], dayfirst=True)
+            ).dt.days
+            / 365.25
+        )
+    ).astype(int)
 
     # Change jersey number to int
-    df["JERSEY"] = pd.to_numeric(df["JERSEY"], downcast="integer")
+    df["JERSEY"] = pd.to_numeric(df["JERSEY"], errors="coerce", downcast="integer")
 
     # Sort by first name
     df = df.sort_values(by=["DISPLAY_FIRST_LAST"], ascending=True)
