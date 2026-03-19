@@ -146,6 +146,8 @@ def get_team_roster(team_abbr, team_name, conference, headshot_map):
 
         jersey = cells.get("number", None)
         jersey = jersey.text.strip() if jersey else ""
+        if "," in jersey:
+            jersey = jersey.split(",")[0].strip()
 
         pos = cells.get("pos", None)
         pos = pos.text.strip() if pos else ""

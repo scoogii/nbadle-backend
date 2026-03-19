@@ -21,7 +21,7 @@ willial06,Alondes Williams,19/06/1999,26,31.0,Pistons,Guard,Undrafted,Undrafted,
 sengual01,Alperen Sengun,25/07/2002,23,28.0,Rockets,Center,16,2021,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1630578.png
 thompam01,Amen Thompson,30/01/2003,23,1.0,Rockets,Forward,4,2023,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1641708.png
 coffeam01,Amir Coffey,17/06/1997,28,7.0,Clippers,Guard,Undrafted,Undrafted,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1629599.png
-drumman01,Andre Drummond,10/08/1993,32,,76ers,Center,9,2012,East,https://cdn.nba.com/headshots/nba/latest/1040x760/203083.png
+drumman01,Andre Drummond,10/08/1993,32,1.0,76ers,Center,9,2012,East,https://cdn.nba.com/headshots/nba/latest/1040x760/203083.png
 jacksan01,Andre Jackson Jr.,13/11/2001,24,44.0,Bucks,Guard,36,2023,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1641748.png
 nembhan01,Andrew Nembhard,16/01/2000,26,2.0,Pacers,Guard,31,2022,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1629614.png
 wiggian01,Andrew Wiggins,23/02/1995,31,22.0,Warriors,Forward,1,2014,West,https://cdn.nba.com/headshots/nba/latest/1040x760/203952.png
@@ -192,7 +192,7 @@ highsha01,Haywood Highsmith,09/12/1996,29,24.0,Heat,Forward,Undrafted,Undrafted,
 joneshe01,Herbert Jones,06/10/1998,27,2.0,Pelicans,Forward,35,2021,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1630529.png
 tysonhu01,Hunter Tyson,13/06/2000,25,5.0,Nuggets,Forward,37,2023,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1641816.png
 quickim01,Immanuel Quickley,17/06/1999,26,5.0,Raptors,Guard,25,2020,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1630193.png
-jonesis01,Isaac Jones,11/07/2000,25,,Kings,Forward,Undrafted,Undrafted,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1642403.png
+jonesis01,Isaac Jones,11/07/2000,25,17.0,Kings,Forward,Undrafted,Undrafted,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1642403.png
 okorois01,Isaac Okoro,26/01/2001,25,35.0,Cavaliers,Guard,5,2020,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1630171.png
 colliis01,Isaiah Collier,08/10/2004,21,13.0,Jazz,Guard,29,2024,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1642268.png
 crawfis01,Isaiah Crawford,01/11/2001,24,24.0,Kings,Forward,Undrafted,Undrafted,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1642384.png
@@ -565,6 +565,6 @@ colliza01,Zach Collins,19/11/1997,28,23.0,Spurs,Center,10,2017,West,https://cdn.
 edeyza01,Zach Edey,14/05/2002,23,14.0,Grizzlies,Center,9,2024,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1641744.png
 lavinza01,Zach LaVine,10/03/1995,31,8.0,Kings,Guard,13,2014,West,https://cdn.nba.com/headshots/nba/latest/1040x760/203897.png
 nnajize01,Zeke Nnaji,09/01/2001,25,22.0,Nuggets,Forward,22,2020,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1630192.png
-willizi02,Ziaire Williams,12/09/2001,24,,Nets,Forward,10,2021,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1630533.png
+willizi02,Ziaire Williams,12/09/2001,24,8.0,Nets,Forward,10,2021,East,https://cdn.nba.com/headshots/nba/latest/1040x760/1630533.png
 willizi01,Zion Williamson,06/07/2000,25,1.0,Pelicans,Forward,1,2019,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1629627.png
 pullizy01,Zyon Pullin,03/03/2001,25,2.0,Grizzlies,Guard,Undrafted,Undrafted,West,https://cdn.nba.com/headshots/nba/latest/1040x760/1642389.png
