@@ -69,6 +69,9 @@ def get_player_by_full_name(player_full_name):
     # Find row corresponding to player_id
     player_row = players_df.loc[players_df["DISPLAY_FIRST_LAST"] == player_full_name]
 
+    if player_row.empty:
+        return None
+
     playerStats = {
         "full_name": player_full_name,
         "headshot": player_row["HEADSHOT"].iloc[0],
@@ -91,10 +94,11 @@ def get_daily_player():
     stored_player_value = str(daily_df["PLAYER"].iloc[0])
 
     # If the current date equals stored date, return stored player data
-    if date.today() == datetime.strptime(stored_time_value, "%Y-%m-%d").date():
+    stored_date = datetime.strptime(stored_time_value, "%Y-%m-%d").date()
+    if date.today() <= stored_date:
         return get_player_by_full_name(stored_player_value)
     # If the current date is greater than the stored date
-    elif date.today() > datetime.strptime(stored_time_value, "%Y-%m-%d").date():
+    else:
         # Get a new player from top_players.csv and get their data
         new_player = get_player()
         if new_player["full_name"] == stored_player_value:
