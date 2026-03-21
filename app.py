@@ -7,7 +7,10 @@ Framework for server that runs backend for NBAdle
 from json import dumps
 from flask import Flask, request
 from flask_cors import CORS
-from player import get_player, get_names, get_player_by_full_name, get_daily_player
+from player import (
+    get_player, get_names, get_player_by_full_name, get_daily_player,
+    get_wnba_player, get_wnba_names, get_wnba_player_by_full_name, get_wnba_daily_player,
+)
 
 
 def default_handler(err):
@@ -70,6 +73,39 @@ def get_daily():
     Flask route to get the player for daily game mode
     """
     return dumps(get_daily_player())
+
+
+@app.route("/api/getwnbaplayer", methods=["GET"])
+def get_random_wnba_player():
+    """
+    Flask route to get a random WNBA player
+    """
+    return dumps(get_wnba_player())
+
+
+@app.route("/api/getwnbanames", methods=["GET"])
+def get_wnba_player_names():
+    """
+    Flask route to get WNBA player names
+    """
+    return dumps(get_wnba_names())
+
+
+@app.route("/api/getwnbaguessedplayer", methods=["GET"])
+def get_wnba_guessed_player():
+    """
+    Flask route to get WNBA player stats from guessed name
+    """
+    full_name = request.args.get("guess")
+    return dumps(get_wnba_player_by_full_name(full_name))
+
+
+@app.route("/api/getwnbadailyplayer", methods=["GET"])
+def get_wnba_daily():
+    """
+    Flask route to get the WNBA player for daily game mode
+    """
+    return dumps(get_wnba_daily_player())
 
 
 if __name__ == "__main__":

@@ -22,18 +22,9 @@ headers = {
 }
 
 
-def get_player():
-    # Get top 100 players in the NBA
-    # Create players dataframe from csv
-    top_players = pd.read_csv("./top_players.csv")
-    # Choose a random player ID from active players
-    player_id = random.choice(top_players["PLAYER_ID"].tolist())
-
-    # Find row corresponding to player_id in stats csv
-    players_df = _read_players()
-    player_row = players_df.loc[players_df["PERSON_ID"] == player_id]
-
-    playerStats = {
+def _get_player_stats(player_row):
+    """Extract player stats dict from a DataFrame row."""
+    return {
         "full_name": player_row["DISPLAY_FIRST_LAST"].iloc[0],
         "headshot": player_row["HEADSHOT"].iloc[0],
         "team_name": player_row["TEAM_NAME"].iloc[0],
@@ -45,75 +36,95 @@ def get_player():
         "draft_year": player_row["DRAFT_YEAR"].iloc[0],
     }
 
-    return playerStats
 
-
-def _read_players():
-    """Read player_data.csv with normalized display names."""
-    df = pd.read_csv("./player_data.csv")
+def _read_players(csv_path="./player_data.csv"):
+    """Read a player CSV with normalized display names."""
+    df = pd.read_csv(csv_path)
     df["DISPLAY_FIRST_LAST"] = df["DISPLAY_FIRST_LAST"].apply(_normalize_display_name)
     return df
 
 
-def get_names():
-    # Get top 100 players in the NBA
-    players_df = _read_players()
-    player_names = players_df["DISPLAY_FIRST_LAST"].tolist()
+def _get_random_player(top_csv, data_csv):
+    """Pick a random player from a top-players CSV and return their stats."""
+    top_players = pd.read_csv(top_csv)
+    player_id = random.choice(top_players["PLAYER_ID"].tolist())
+    players_df = _read_players(data_csv)
+    player_row = players_df.loc[players_df["PERSON_ID"] == player_id]
+    return _get_player_stats(player_row)
 
-    return player_names
 
-
-def get_player_by_full_name(player_full_name):
-    players_df = _read_players()
-
-    # Find row corresponding to player_id
+def _get_player_by_name(player_full_name, data_csv):
+    """Look up a player by name from a given CSV."""
+    players_df = _read_players(data_csv)
     player_row = players_df.loc[players_df["DISPLAY_FIRST_LAST"] == player_full_name]
-
     if player_row.empty:
         return None
-
-    playerStats = {
-        "full_name": player_full_name,
-        "headshot": player_row["HEADSHOT"].iloc[0],
-        "team_name": player_row["TEAM_NAME"].iloc[0],
-        "conference": player_row["TEAM_CONFERENCE"].iloc[0],
-        "age": int(player_row["AGE"].iloc[0]),
-        "position": player_row["POSITION"].iloc[0],
-        "player_number": int(player_row["JERSEY"].iloc[0]),
-        "draft_number": player_row["DRAFT_NUMBER"].iloc[0],
-        "draft_year": player_row["DRAFT_YEAR"].iloc[0],
-    }
-
-    return playerStats
+    return _get_player_stats(player_row)
 
 
-def get_daily_player():
-    # Check the current date against the stored date in time.txt
-    daily_df = pd.read_csv("./daily.csv")
+def _get_daily(daily_csv, top_csv, data_csv, get_random_fn, get_by_name_fn):
+    """Generic daily player logic for any league."""
+    daily_df = pd.read_csv(daily_csv)
     stored_time_value = daily_df["TIME"].iloc[0]
     stored_player_value = str(daily_df["PLAYER"].iloc[0])
 
-    # If the current date equals stored date, return stored player data
     stored_date = datetime.strptime(stored_time_value, "%Y-%m-%d").date()
     if date.today() <= stored_date:
-        return get_player_by_full_name(stored_player_value)
-    # If the current date is greater than the stored date
+        return get_by_name_fn(stored_player_value)
     else:
-        # Get a new player from top_players.csv and get their data
-        new_player = get_player()
+        new_player = get_random_fn()
         if new_player["full_name"] == stored_player_value:
-            new_player = get_player()
+            new_player = get_random_fn()
 
-        # Change time in csv to the new current time
         daily_df.at[0, "TIME"] = str(date.today())
-
-        # Change player in csv to the new player's name
         daily_df.at[0, "PLAYER"] = new_player["full_name"]
+        daily_df.to_csv(daily_csv, index=False)
 
-        daily_df.to_csv("./daily.csv", index=False)
-
-        # Return the player's data
         return new_player
+
+
+# --- NBA ---
+
+def get_player():
+    return _get_random_player("./top_players.csv", "./player_data.csv")
+
+
+def get_names():
+    players_df = _read_players("./player_data.csv")
+    return players_df["DISPLAY_FIRST_LAST"].tolist()
+
+
+def get_player_by_full_name(player_full_name):
+    return _get_player_by_name(player_full_name, "./player_data.csv")
+
+
+def get_daily_player():
+    return _get_daily(
+        "./daily.csv", "./top_players.csv", "./player_data.csv",
+        get_player, get_player_by_full_name,
+    )
+
+
+# --- WNBA ---
+
+def get_wnba_player():
+    return _get_random_player("./wnba_top_players.csv", "./wnba_player_data.csv")
+
+
+def get_wnba_names():
+    players_df = _read_players("./wnba_player_data.csv")
+    return sorted(players_df["DISPLAY_FIRST_LAST"].tolist())
+
+
+def get_wnba_player_by_full_name(player_full_name):
+    return _get_player_by_name(player_full_name, "./wnba_player_data.csv")
+
+
+def get_wnba_daily_player():
+    return _get_daily(
+        "./wnba_daily.csv", "./wnba_top_players.csv", "./wnba_player_data.csv",
+        get_wnba_player, get_wnba_player_by_full_name,
+    )
 
 
 if __name__ == "__main__":
